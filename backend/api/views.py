@@ -1,3 +1,5 @@
-from django.shortcuts import render
+from django.http import JsonResponse
 
-# Create your views here.
+def get_response(request):
+    data = {'message': 'Successful Reply from Backend!!!'}
+    return JsonResponse(data)
