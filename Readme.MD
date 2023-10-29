@@ -4,7 +4,7 @@ Welcome to the Le Petite Patisserie project documentation. In this guide, we'll 
 
 ## Table of Contents
 
-1. Prerequisits
+1. [Prerequisits](https://github.com/dayofmythology/patisserie_project#1-prerequisits)
 2. Containerising the Backend Application
 3. Containerising the Frontend Application
 4. Connecting the Frontend to the Backend
