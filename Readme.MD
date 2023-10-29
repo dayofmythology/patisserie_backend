@@ -1,38 +1,42 @@
-# Le Petit Patissier 
+# Le Petit Patissier Project
 
 Welcome to the Le Petite Patisserie project documentation. In this guide, we'll walk you through containerizing and deploying a Django-based backend application and a Django-based frontend application using Docker and Docker Compose.
 
 ## Table of Contents
 
 1. [Prerequisits](https://github.com/dayofmythology/patisserie_project#1-prerequisits)
-2. Containerising the Backend Application
-3. Containerising the Frontend Application
-4. Connecting the Frontend to the Backend
-5. Running the applications with Docker Compose
-6. Deploying to Production
-7. Troubleshooting
+2. [Clone the Project](https://)
+3. [Containerising the Backend Application](https://github.com/dayofmythology/patisserie_project#2-containerising-the-backend-application)
+4. [Containerising the Frontend Application](https://github.com/dayofmythology/patisserie_project#3-containerising-the-frontend--application)
+5. Connecting the Frontend to the Backend
+6. Running the applications with Docker Compose
+7. Deploying to Production
+8. Troubleshooting
 
 ## 1. Prerequisits
 Before you begin, ensure that you have:
 - [Git](https://git-scm.com/downloads) installed on your system
 - [Docker ](https://docs.docker.com/get-docker/) installed on your system
-- Both apps are based on Django Framework.
+- Both apps are based on [Django Framework](https://docs.djangoproject.com/en/4.2/)
 -  **Apps are using port 8000 and 8001 by default**. If you have any other apps running, make sure you close them or change the containers ports by setting the **PORT** environment variable at runtime.
 
-## 2. Containerising the Backend Application
-
-### 2.1 Dockerfile for the Backend
-
-### 2.1 Clone the Project
+## 2. Clone the Project
 Clone the project:
 ```
-git clone https://github.com/dayofmythology/patisserie_backend.git
+git clone https://github.com/dayofmythology/patisserie_project.git
 ```
 
 
-### 2.2 Build a Docker image:
+## 3. Containerising the Backend Application
 
-To containerise the backend application, a Dockerfile that will help in building a docker image of the Django based app is located at the root of the Django project:
+### 3.1 Navigate to the Backend Project Folder:
+Move into the **backend** project folder:
+```markdown
+cd backend
+```
+### 3.2 Build a Docker image:
+
+To containerise the backend application, a Dockerfile that will help in building a docker image of the Django based app is located at the root of the **backend Django project**:
 
 [Dockerfile:](https://github.com/dayofmythology/patisserie_backend/blob/main/backend/Dockerfile)
 
@@ -56,7 +60,7 @@ To build the image, run the following command:
 ```
 docker build -t backend-api .
 ```
-### 2.3 Test the image:
+### 3.3 Test the image:
  - Run the following command:
 ```markdown
 docker run -ti -d -p 8001:8001 --name backend-server backend-api:latest
@@ -65,19 +69,18 @@ docker run -ti -d -p 8001:8001 --name backend-server backend-api:latest
 
     ![Successful Response from API](successful_response.png)
     
-## 3. Containerising the Frontend  Application
-### 3.1 Clone the Project
-Clone the project:
+## 4. Containerising the Frontend  Application
+### 4.1 Navigate to the Frontend Project Folder:
+Move into the **frontend** project folder:
+```markdown
+cd frontend
 ```
-git clone https://github.com/dayofmythology/patisserie_backend.git
-```
 
+### 4.2 Build a Docker image:
 
-### 3.2 Build a Docker image:
+To containerise the frontend application, a Dockerfile that will help in building a docker image of the Django based app is located at the root of the **frontend Django project**:
 
-To containerise the backend application, a Dockerfile that will help in building a docker image of the Django based app is located at the root of the Django project:
-
-[Dockerfile:](https://github.com/dayofmythology/patisserie_backend/blob/main/backend/Dockerfile)
+[Dockerfile:](https://github.com/dayofmythology/patisserie_project/blob/main/frontend/Dockerfile)
 
 ```Dockerfile
 FROM python:3.10
@@ -99,7 +102,7 @@ To build the image, run the following command:
 ```
 docker build -t frontend-app .
 ```
-### 3.3 Test the image:
+### 4.3 Test the image:
  - Run the following command:
 ```markdown
 docker run -ti -d -p 8000:8000 --name frontend-server frontend-app:latest
