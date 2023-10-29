@@ -5,10 +5,10 @@ Welcome to the Le Petite Patisserie project documentation. In this guide, we'll 
 ## Table of Contents
 
 1. [Prerequisits](https://github.com/dayofmythology/patisserie_project#1-prerequisits)
-2. [Clone the Project](https://)
+2. [Clone the Project](https://github.com/dayofmythology/patisserie_project/tree/main#2-clone-the-project)
 3. [Containerising the Backend Application](https://github.com/dayofmythology/patisserie_project#2-containerising-the-backend-application)
 4. [Containerising the Frontend Application](https://github.com/dayofmythology/patisserie_project#3-containerising-the-frontend--application)
-5. Connecting the Frontend to the Backend
+5. Pushing the images to Amazon ECR
 6. Running the applications with Docker Compose
 7. Deploying to Production
 8. Troubleshooting
@@ -17,8 +17,8 @@ Welcome to the Le Petite Patisserie project documentation. In this guide, we'll 
 Before you begin, ensure that you have:
 - [Git](https://git-scm.com/downloads) installed on your system
 - [Docker ](https://docs.docker.com/get-docker/) installed on your system
+- [Docker Compose](https://docs.docker.com/compose/install/) installed on your system
 - Both apps are based on [Django Framework](https://docs.djangoproject.com/en/4.2/)
--  **Apps are using port 8000 and 8001 by default**. If you have any other apps running, make sure you close them or change the containers ports by setting the **PORT** environment variable at runtime.
 
 ## 2. Clone the Project
 Clone the project:
@@ -110,4 +110,11 @@ docker run -ti -d -p 8000:8000 --name frontend-server frontend-app:latest
 - Open the browser and navigate to http://localhost:8000 . You should see the following screen: 
 
     ![Successful Response from backend API](frontend_success.png)
-    
+
+## 5. Push the images to ACR
+## 8. Troubleshooting
+- You are running docker-compose in detached mode i.e. `sudo docker compose up -d` and the backend container is failing to start:
+  - Make sure
+view the logs of the backend service to identify the specific error messages. The command to check the logs is: `sudo docker compose logs backend`
+  - Make sure that there's no misconfiguration in the `docker-compose.yml` including syntax errors, missing environment variables, or incorrect volume mappings.
+- **Apps are using port 8000 and 8001 by default to accomodate a local run of both images**. If you have changed the ports and happen to be the same, make sure that the ports are not used by other apps/services or containers on the same machine. You can use the **PORT** environment to override the default port value when running a simple test using `docker run` command, or modify it in the docker compose file.
