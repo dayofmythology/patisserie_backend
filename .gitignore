@@ -3,3 +3,7 @@ backend/api/migrations/**
 backend/api/__pycache__/**
 backend/db.sqlite3
 backend/.dockerenv
+frontend/frontendapp/migrations/**
+frontend/frontendapp/__pycache__/**
+frontend/db.sqlite3
+frontend/.dockerenv
