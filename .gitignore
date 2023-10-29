@@ -1,1 +1,5 @@
 env/*
+backend/api/migrations/**
+backend/api/__pycache__/**
+backend/db.sqlite3
+backend/.dockerenv
