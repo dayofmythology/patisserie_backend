@@ -3,6 +3,7 @@ FROM python:3.10
 # to the terminal with out buffering it first
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
+ENV PORT = 8001
 
 WORKDIR /api
 
@@ -10,5 +11,4 @@ COPY  . /api/
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-EXPOSE 8001
-CMD [ "python","manage.py","runserver","0.0.0.0:8001" ]
+CMD [ "python","manage.py","runserver","0.0.0.0:${PORT}" ]
