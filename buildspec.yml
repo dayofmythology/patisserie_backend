@@ -8,10 +8,7 @@ phases:
   pre_build:
     commands:
       - apt-get update
-      - apt install apt-transport-https ca-certificates curl software-properties-common
-      - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-      - add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu jammy stable"
-      - apt install docker-ce
+      - apt install docker
       - systemctl start docker
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 695523369539.dkr.ecr.eu-west-1.amazonaws.com
