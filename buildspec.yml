@@ -22,13 +22,13 @@ phases:
   build:
     commands:
       - echo Building Backend Docker image...
-      - docker build -t backend-api:latest .
+      - docker build -t backend:latest .
       - echo Building Frontend Docker image...
       - cd ../frontend
-      - docker build -t frontendapp:latest .
+      - docker build -t frontend:latest .
   post_build:
     commands:
       - echo Pushing Backend Docker image to Amazon ECR...
-      - docker push 695523369539.dkr.ecr.eu-west-1.amazonaws.com/backend-api:latest
+      - docker push 695523369539.dkr.ecr.eu-west-1.amazonaws.com/backend:latest
       - echo Pushing Frontend Docker image to Amazon ECR...
-      - docker push 695523369539.dkr.ecr.eu-west-1.amazonaws.com/frontendapp:latest
+      - docker push 695523369539.dkr.ecr.eu-west-1.amazonaws.com/frontend:latest
