@@ -23,10 +23,11 @@ phases:
     commands:
       - echo Building Backend Docker image...
       - docker build -t backend:latest .
+      - docker tag backend:latest 695523369539.dkr.ecr.eu-west-1.amazonaws.com/backend:latest
       - echo Building Frontend Docker image...
       - cd ../frontend
       - docker build -t frontend:latest .
-      - docker images
+      - docker tag frontend:latest 695523369539.dkr.ecr.eu-west-1.amazonaws.com/frontend:latest
   post_build:
     commands:
       - echo Pushing Backend Docker image to Amazon ECR...
