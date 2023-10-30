@@ -13,7 +13,7 @@ phases:
       - add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
       - apt-get update
       - apt-get -y install docker-ce
-      - service docker restart
+      - service docker start
       - docker --version
       - service docker status
       - echo Logging in to Amazon ECR...
