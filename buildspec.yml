@@ -22,6 +22,7 @@ phases:
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin $REPO_URI
       - cd backend
+      
   build:
     commands:
       - echo Building Backend Docker image...
