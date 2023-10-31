@@ -37,4 +37,4 @@ phases:
       - docker push $REPO_URI/frontend:latest
 
 artifacts:
-  files: imagedefinitions.json
+  files: ./imagedefinitions.json
