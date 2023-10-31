@@ -1,4 +1,4 @@
-FROM python:3.10
+FROM 695523369539.dkr.ecr.eu-west-1.amazonaws.com/python:3.10
 # The enviroment variable ensures that the python output is set straight
 # to the terminal with out buffering it first
 ENV PYTHONUNBUFFERED 1
