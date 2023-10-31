@@ -7,6 +7,9 @@ env:
 phases:
   pre_build:
     commands:
+      - REPO_URI=695523369539.dkr.ecr.eu-west-1.amazonaws.com
+      - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-56)
       - apt-get update
       - apt-get -y install apt-transport-https ca-certificates curl software-properties-common
       - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
@@ -17,20 +20,20 @@ phases:
       - docker --version
       - service docker status
       - echo Logging in to Amazon ECR...
-      - aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 695523369539.dkr.ecr.eu-west-1.amazonaws.com
+      - aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin $REPO_URI
       - cd backend
   build:
     commands:
       - echo Building Backend Docker image...
       - docker build -t backend:latest .
-      - docker tag backend:latest 695523369539.dkr.ecr.eu-west-1.amazonaws.com/backend:latest
+      - docker tag backend:latest $REPO_URI/backend:latest
       - echo Building Frontend Docker image...
       - cd ../frontend
       - docker build -t frontend:latest .
-      - docker tag frontend:latest 695523369539.dkr.ecr.eu-west-1.amazonaws.com/frontend:latest
+      - docker tag frontend:latest $REPO_URI/frontend:latest
   post_build:
     commands:
       - echo Pushing Backend Docker image to Amazon ECR...
-      - docker push 695523369539.dkr.ecr.eu-west-1.amazonaws.com/backend:latest
+      - docker push $REPO_URI/backend:latest
       - echo Pushing Frontend Docker image to Amazon ECR...
-      - docker push 695523369539.dkr.ecr.eu-west-1.amazonaws.com/frontend:latest
+      - docker push $REPO_URI//frontend:latest
