@@ -8,9 +8,9 @@ Welcome to the Le Petite Patisserie project documentation. In this guide, we'll 
 2. [Clone the Project](https://github.com/dayofmythology/patisserie_project/tree/main#2-clone-the-project)
 3. [Containerising the Backend Application](https://github.com/dayofmythology/patisserie_project#2-containerising-the-backend-application)
 4. [Containerising the Frontend Application](https://github.com/dayofmythology/patisserie_project#3-containerising-the-frontend--application)
-5. Running the applications with Docker Compose
-6. Deploying to Production
-7. Troubleshooting
+5. [Running the applications with Docker Compose](https://github.com/dayofmythology/patisserie_project/blob/main/Mohamed_Ait_Answers.MD#5-running-the-applications-with-docker-compose)
+6. [Deploy to AWS ECS Fargate Production using AWS CodePipeline](https://github.com/dayofmythology/patisserie_project/blob/main/Mohamed_Ait_Answers.MD#6-deploy-to-aws-ecs-fargate-production-using-aws-codepipeline)
+7. [Troubleshooting](https://github.com/dayofmythology/patisserie_project/blob/main/Mohamed_Ait_Answers.MD#7-troubleshooting)
 
 ## 1. Prerequisits
 Before you begin, ensure that you have:
@@ -116,52 +116,21 @@ To run the application on docker-compose, run the following command:
 docker-compose up -d
 ```
 ## 6. Deploy to AWS ECS Fargate Production using AWS CodePipeline
-The setup of the project as it is now is like this
-![Architecture]()
-### 6.1 Build and Push the frontend and backend images to AWS ECR
 
+**NOT FULLY IMPLEMENTED**
+
+The setup of the project as it is now is like this:
+![Architecture](AWSArchitecture.png)
 1. Create a backend and frontend repositories in the ACR
 2. The buildspec.yml file will build images for both the backend and frontend and push them to ACR
+3. Pipeline will be triggered and code will be pushed to production
 
-### 6.2 Set Up AWS CodePipeline:
+How it works: In this setup, the developer will be pushing to the git repo, which will result in a webhook notification be sent to codebuild. The latter would then:
+1. build the images to ECR
+2. Register ECS tasklist definitions with ECS
+3. Generate an appspec.yml and save it to S3
+4. Codedeploy would then use the appspec.yml and use it to deploy new/updated tasks to the ECS cluster depending on the chosen strategy (Rolling update or Blue/Green approach). In this setup, the rolling update is chosen for simplicity.
 
-Sign in to the AWS Management Console.
-Open the AWS CodePipeline service.
-Click on "Create pipeline."
-Provide a name for the pipeline and click "Next."
-Source Stage:
-
-1. Sign in to the AWS Management Console.
-2. Open the AWS CodePipeline service.
-3. third
-
-In the source stage, choose the source code repository (e.g., AWS CodeCommit, GitHub, or Amazon S3) where your application code is stored.
-Configure the repository and branch to monitor for changes.
-Build Stage (AWS CodeBuild):
-
-Create a build project in AWS CodeBuild.
-Configure the build project to build the Docker images and push them to ECR.
-Specify build commands and settings in the build project configuration.
-Add this CodeBuild project to the pipeline as the build stage.
-Deployment Stage (AWS ECS Fargate):
-
-In the pipeline, add a deployment stage.
-Choose Amazon ECS as the deployment provider.
-Configure the ECS service and task definitions.
-Specify the ECR image repository and image details to deploy.
-Configure the AWS Fargate launch type and task definition.
-IAM Roles:
-
-Ensure that the AWS Identity and Access Management (IAM) roles used by CodePipeline, CodeBuild, and ECS have the necessary permissions to interact with other AWS services.
-Test the Pipeline:
-
-Trigger the pipeline manually or allow it to be triggered automatically when changes are pushed to the source repository.
-Monitoring:
-
-Set up monitoring and alarms using Amazon CloudWatch to track the pipeline's progress and notify you of any issues.
-Security:
-
-Ensure that your AWS resources are properly secured with the appropriate security groups and IAM roles.
 
 ## 7. Troubleshooting
 - You are running docker-compose in detached mode i.e. `sudo docker compose up -d` and the backend container is failing to start:
