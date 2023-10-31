@@ -31,8 +31,6 @@ phases:
       - cd ../frontend
       - docker build -t frontend:latest .
       - docker tag frontend:latest $REPO_URI/frontend:latest
-  post_build:
-    commands:
       - echo Pushing Backend Docker image to Amazon ECR...
       - docker push $REPO_URI/backend:latest
       - echo Pushing Frontend Docker image to Amazon ECR...
